@@ -70,7 +70,7 @@ function EditUser() {
       formDataObj.append("profilePic", img);
     }
 
-    const res = await fetch("http://localhost:3000/editUser", {
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/editUser`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formDataObj,

@@ -8,7 +8,7 @@ const Dashboard = () => {
   const nav= useNavigate()
   const token = localStorage.getItem('hotelToken')
   const validateToken=async ()=>{
-       const response = await fetch('http://localhost:3000/check',{method:"GET",headers:{
+       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/check`,{method:"GET",headers:{
         'Authorization' : `Bearer ${token}`
        }})
       //  const res  =  await response.json()

@@ -9,7 +9,7 @@ const UsersList = () => {
   const {setSeeProfile,setAddUser,setEditUser,setEditField,totalUsers,setTotalUsers,setCurrentUser,setCurrentEdit} = useContext(AdminContext)
     const token = localStorage.getItem('hotelToken')
     async function findUsers(){
-      const response = await fetch('http://localhost:3000/getUsers',{method:"GET",
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/getUsers`,{method:"GET",
         headers:{'Authorization':`Bearer ${token}`},
       })
       const res =await response.json()
@@ -21,7 +21,7 @@ const UsersList = () => {
         findUsers()
     },[])
     const DeleteUsers=async (user)=>{
-     const response = await fetch('http://localhost:3000/deleteUser',{method:"POST",headers:{'Authorization':`Bearer ${token}`,'Content-type':'application/json'},body:JSON.stringify({user})})
+     const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/deleteUser`,{method:"POST",headers:{'Authorization':`Bearer ${token}`,'Content-type':'application/json'},body:JSON.stringify({user})})
 
      const res= await response.json()
      alert(res.message)

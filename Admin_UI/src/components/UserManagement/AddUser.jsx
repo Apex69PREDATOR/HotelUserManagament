@@ -24,7 +24,7 @@ function AddUser() {
   const onSubmit=async()=>{
     const formData = new FormData(document.getElementById('addForm'))
     formData.append('profilePic',profileImage)
-    const res = await fetch('http://localhost:3000/addUser',{method:"POST",headers:{'Authorization':`Bearer ${token}`},body:formData})
+    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/addUser`,{method:"POST",headers:{'Authorization':`Bearer ${token}`},body:formData})
     const result =await res.json()
     alert(result.message)
     if(res.ok){

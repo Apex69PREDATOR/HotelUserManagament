@@ -13,7 +13,7 @@ const UserProfile = ({currentUser}) => {
     const id = currentUser?._id
     const {setTotalUsers,setCurrentUser,setSeeProfile} = useContext(AdminContext)
    const DeleteUsers=async (user)=>{
-     const response = await fetch('http://localhost:3000/deleteUser',{method:"POST",headers:{'Authorization':`Bearer ${token}`,'Content-type':'application/json'},body:JSON.stringify({user})})
+     const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/deleteUser`,{method:"POST",headers:{'Authorization':`Bearer ${token}`,'Content-type':'application/json'},body:JSON.stringify({user})})
 
      const res= await response.json()
      alert(res.message)
