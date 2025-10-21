@@ -11,5 +11,13 @@ export default defineConfig({
     port : 5173,
     strictPort:true,
     allowedHosts:['*']
-  }
+  },
+  optimizeDeps:{
+    include:['quill']
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true, // Handle mixed CommonJS/ESM modules
+    },
+  },
 })
