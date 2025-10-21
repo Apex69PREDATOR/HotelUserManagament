@@ -51,5 +51,3 @@ Access the Admin UI through your browser (default port is usually 3000, e.g., ht
 
 Contributing
 Feel free to fork this repository and submit pull requests. Please follow the existing code style and include tests where applicable.
-License
-[Add license information here, e.g., MIT License]
