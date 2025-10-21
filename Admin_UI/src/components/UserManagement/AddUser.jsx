@@ -1,6 +1,6 @@
 
 import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css";
+// import "quill/dist/quill.snow.css";
 import { AdminContext } from "../../context/AdminContext";
 import { useContext,useState } from "react";
 
