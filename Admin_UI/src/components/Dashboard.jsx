@@ -1,5 +1,5 @@
 import Nav from './Nav'
-import Searchbar from './searchbar'
+import Searchbar from './Searchbar'
 import { Outlet } from 'react-router-dom'
 import AdminRootContext from '../context/AdminContext'
 import { useNavigate } from 'react-router-dom'
