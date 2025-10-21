@@ -3,9 +3,7 @@ import { TextField,InputAdornment } from '@mui/material'
 import { DeleteOutline,EditOutlined,Search } from '@mui/icons-material'
 import { AdminContext } from '../../context/AdminContext'
 import { useContext,useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 const UsersList = () => {
-  const nav=useNavigate()
   const {setSeeProfile,setAddUser,setEditUser,setEditField,totalUsers,setTotalUsers,setCurrentUser,setCurrentEdit} = useContext(AdminContext)
     const token = localStorage.getItem('hotelToken')
     async function findUsers(){
@@ -50,7 +48,6 @@ const UsersList = () => {
                                    setAddUser(false)
                                    setEditUser(false)
                                    setCurrentUser(val)
-                                   nav('#profile')
   }} className='flex justify-between items-center md:p-2 p-1 bg-white  shadow-sm rounded-md [&>_*]:w-[22%] h-[60px] [&>_*]:text-center border border-gray-50 cursor-pointer hover:border-orange-100'><span className='flex flex-col items-center'><p>{val.Name}</p>
          <p className='p-1 px-2 text-[0.7em] bg-gray-50 text-gray-400 font-semibold rounded-full'>{val._id}</p></span>
          <span className='flex flex-wrap gap-1 [&>_*]:rounded-full [&>_*]:p-1 [&>_*]:text-gray-400 [&>_*]:bg-gray-50 [&>_*]:border-gray-100 [&>_*]:border justify-center [&>_*]:text-[0.7em] [&>_*]:font-bold'>
