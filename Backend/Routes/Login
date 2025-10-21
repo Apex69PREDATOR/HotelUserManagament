@@ -1,0 +1,16 @@
+const Route = require("express").Router()
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
+
+Route.post('/',(req,res)=>{
+    try{
+    const number = req.body.number;
+    const token = jwt.sign({number},process.env.JWT_PRIVATE_KEY,{expiresIn:'5d'})
+    
+    return res.status(200).json({token})
+    }
+    catch(err){
+    return res.status(500).json({message:'error occured'})
+    }
+})
+module.exports = Route
