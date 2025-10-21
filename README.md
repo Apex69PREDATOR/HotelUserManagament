@@ -20,7 +20,7 @@ Navigate to the Admin UI directory:cd Admin_UI
 Install dependencies:npm install
 
 
-Start the development server (if applicable):npm start
+Start the development server (if applicable):npm start or npm run dev
 
 
 
