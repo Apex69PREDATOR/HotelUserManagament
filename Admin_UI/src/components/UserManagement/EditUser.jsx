@@ -9,6 +9,7 @@ import Role from "./Utils/Role";
 import Designation from "./Utils/Designation";
 import Status from "./Utils/Status";
 import BasicInfo from "./Utils/BasicInfo";
+import MyEditor from "./Utils/MyEditor";
 
 function EditUser() {
   const { setEditUser, editField, currentEdit } = useContext(AdminContext);
@@ -27,32 +28,9 @@ function EditUser() {
 
   const token = localStorage.getItem("hotelToken");
 
-  const { quill, quillRef } = useQuill({
-    placeholder: "Add Note",
-    theme: "snow",
-    modules: {
-      toolbar: [
-        [{ font: [] }, { size: [] }],
-        ["bold", "italic", "underline", "strike"],
-        [{ list: "ordered" }, { list: "bullet" }],
-        ["link", "image", "code-block"],
-        [{ align: [] }],
-      ],
-    },
-  });
 
   // Sync Quill content with formData.Note
-  useEffect(() => {
-    if (quill) {
-      quill.on("text-change", () => {
-        setFormData((prev) => ({ ...prev, Note: quill.root.innerHTML }));
-      });
-      // Set initial note content
-      if (currentEdit?.Note) {
-        quill.root.innerHTML = currentEdit.Note;
-      }
-    }
-  }, [quill, currentEdit?.Note]);
+ 
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -185,11 +163,7 @@ function EditUser() {
                 <label className="text-sm font-medium text-gray-700 mb-1 block">
                   Note
                 </label>
-                <div
-                  ref={quillRef}
-                  className="bg-white rounded-lg"
-                  style={{ height: "180px" }}
-                />
+               <MyEditor/>
               </div>
             </div>
           </div>
