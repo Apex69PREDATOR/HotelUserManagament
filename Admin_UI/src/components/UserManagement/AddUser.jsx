@@ -1,13 +1,25 @@
 
-// import "quill/dist/quill.snow.css";
+import { useQuill } from "react-quilljs";
+import "quill/dist/quill.snow.css";
 import { AdminContext } from "../../context/AdminContext";
 import { useContext,useState } from "react";
-import MyEditor from "./Utils/MyEditor";
 
 function AddUser() {
     const {setAddUser,setTotalUsers} = useContext(AdminContext)
     const [profileImage,setProfileImage] = useState(null)
-  
+  const { quillRef } = useQuill({
+    placeholder: "Add Note",
+    theme: "snow",
+    modules: {
+      toolbar: [
+        [{ font: [] }, { size: [] }],
+        ["bold", "italic", "underline", "strike"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["link", "image", "code-block"],
+        [{ align: [] }],
+      ],
+    },
+  });
   const token = localStorage.getItem('hotelToken')
   const onSubmit=async()=>{
     const formData = new FormData(document.getElementById('addForm'))
@@ -114,7 +126,7 @@ function AddUser() {
           {/* Note (ReactQuillJS) */}
           <div>
             <label className="text-sm font-medium text-gray-700 mb-1 block">Note</label>
-            <MyEditor/>
+            <div ref={quillRef} className="bg-white rounded-lg" style={{ height: "180px" }} />
           </div>
         </div>
       </div>
