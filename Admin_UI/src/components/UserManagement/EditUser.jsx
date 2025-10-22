@@ -75,12 +75,18 @@ function EditUser() {
       headers: { Authorization: `Bearer ${token}` },
       body: formDataObj,
     });
-
+    console.log(res);
+    
+    try{
     const result = await res.json();
     alert(result.message);
     if (res.ok) {
       setEditUser(false);
     }
+  }
+  catch(err){
+     
+  }
   };
 
   return (
