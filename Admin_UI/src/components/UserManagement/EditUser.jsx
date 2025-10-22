@@ -11,7 +11,7 @@ import Status from "./Utils/Status";
 import BasicInfo from "./Utils/BasicInfo";
 
 function EditUser() {
-  const { setEditUser, editField, currentEdit } = useContext(AdminContext);
+  const { setEditUser, editField, currentEdit,setTotalUsers } = useContext(AdminContext);
   const [img, setImg] = useState(currentEdit?.Image || pic);
   const [formData, setFormData] = useState({
     Name: currentEdit?.Name || "",
@@ -83,6 +83,8 @@ function EditUser() {
     alert(result.message);
     if (res.ok) {
       setEditUser(false);
+      setTotalUsers(prev=>(prev.filter(val=>(val._id!==currentEdit?._id))))
+      setTotalUsers(prev=>([...prev,result?.user]))
     }
   }
   catch(err){
