@@ -4,6 +4,7 @@ import backgroundImg from '../assets/Ancient.jpg'
 const Login = () => {
   const nav = useNavigate()
     const [number,setNumber] = useState(null)
+    
     const login=async ()=>{        
         const res= await fetch(`${import.meta.env.VITE_SERVER_URL}/login`,{method:"POST",headers:{
             'Content-type':'application/json'
