@@ -5,6 +5,7 @@ import { AdminContext } from '../../context/AdminContext'
 import { useContext,useEffect,useState } from 'react'
 const UsersList = () => {
   const [load,loading] = useState([])
+
   const {setSeeProfile,setAddUser,setEditUser,setEditField,totalUsers,setTotalUsers,setCurrentUser,setCurrentEdit} = useContext(AdminContext)
     const token = localStorage.getItem('hotelToken')
     async function findUsers(){
@@ -33,7 +34,7 @@ const UsersList = () => {
      loading(prev=>(prev.filter(val=>val!==user._id)))
     }
   return (
-    <section id='userList' className='h-[85vh] md:w-[40vw] w-[100vw] bg-white md:p-5 p-2 rounded-md shadow-md flex flex-col gap-6 [&_*]:font-sans'>
+    <section id='userList' className='md:h-[85vh] h-[70vw] md:w-[40vw] w-[100vw] bg-white md:p-5 p-2 rounded-md shadow-md flex flex-col gap-6 [&_*]:font-sans'>
      <div className="heading flex gap-5 items-center"><PersonOutlined className='text-orange-300' sx={{fontSize:window.innerWidth>475?'3.2em':'2.3em'}}/> <p className='md:text-[2.5em] text-[1.6em] font-medium'>User Management</p></div>
      <div className="search flex items-center w-[100%] h-[7%] gap-2">
      <TextField sx={{padding:'0'}} className='w-[92%]' placeholder='Search...' slotProps={{input:{endAdornment:(<InputAdornment position='end'>
@@ -44,7 +45,7 @@ const UsersList = () => {
         setEditUser(false)
       }}>+</div>
      </div>
-     <div className="users flex flex-col gap-3 overflow-auto md:text-sm text-[0.8em]">
+     <div className="users flex flex-col items-center gap-3 overflow-auto md:text-sm text-[0.8em]">
          <div className='flex justify-between p-2 bg-orange-50  shadow-sm rounded-md [&>_*]:w-[22%] [&>_*]:text-center' style={{fontWeight:'bold',fontFamily:'sans-serif'}}><span>Name</span><span>Designation</span><span>Role</span><span>Status</span><span>Action Buttons</span></div>
 
         {totalUsers?.map(val=>(<div key={val._id} onClick={()=>{setSeeProfile(true)
@@ -70,7 +71,7 @@ const UsersList = () => {
           e.stopPropagation()
           DeleteUsers(val)
          }} className='bg-gray-50 md:p-2 p-1 rounded-md shadow-sm cursor-pointer' sx={{fontSize:window.innerWidth>475?'2.5em':'2em',color:'#ffbfba'}}/>}</span>
-         </div>))}
+         </div>)) || <div className='loader'></div>}
          
 
      </div>
