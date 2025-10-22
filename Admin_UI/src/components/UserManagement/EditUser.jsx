@@ -24,6 +24,7 @@ function EditUser() {
     id: currentEdit?._id || "",
     Note: currentEdit?.Note || "",
   });
+  const [load,loading]= useState(false)
 
   const token = localStorage.getItem("hotelToken");
 
@@ -55,6 +56,7 @@ function EditUser() {
   }, [quill, currentEdit?.Note]);
 
   const onSubmit = async (e) => {
+    loading(true)
     e.preventDefault();
     const formDataObj = new FormData();
     formDataObj.append("Name", formData.Name);
@@ -75,8 +77,6 @@ function EditUser() {
       headers: { Authorization: `Bearer ${token}` },
       body: formDataObj,
     });
-    const txt =await res.text()
-    console.log(txt);
     
     try{
     const result = await res.json();
@@ -91,6 +91,8 @@ function EditUser() {
      console.log(err);
      
   }
+    loading(false)
+
   };
 
   return (
@@ -248,7 +250,7 @@ function EditUser() {
             type="submit"
             className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 rounded-lg transition"
           >
-            Save Changes
+            {load?<div className="loader"></div>:'Save Changes'}
           </button>
         </div>
       </form>
