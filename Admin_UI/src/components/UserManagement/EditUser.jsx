@@ -75,7 +75,8 @@ function EditUser() {
       headers: { Authorization: `Bearer ${token}` },
       body: formDataObj,
     });
-    console.log(res);
+    const txt =await res.text()
+    console.log(txt);
     
     try{
     const result = await res.json();
