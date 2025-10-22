@@ -248,7 +248,7 @@ function EditUser() {
           </button>
           <button
             type="submit"
-            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 rounded-lg transition"
+            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 rounded-lg transition items-center justify-center"
           >
             {load?<div className="loader"></div>:'Save Changes'}
           </button>

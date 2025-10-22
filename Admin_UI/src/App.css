@@ -1,6 +1,6 @@
 /* HTML: <div class="loader"></div> */
 .loader {
-  width: 40px;
+  width: 30px;
   aspect-ratio: 1;
   color: #f7f3bf;
   background: conic-gradient(currentColor 0 270deg,#0000 0);

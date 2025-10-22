@@ -7,6 +7,8 @@ import { useContext,useState } from "react";
 function AddUser() {
     const {setAddUser,setTotalUsers} = useContext(AdminContext)
     const [profileImage,setProfileImage] = useState(null)
+  const [load,loading]= useState(false)
+
   const { quillRef } = useQuill({
     placeholder: "Add Note",
     theme: "snow",
@@ -22,6 +24,7 @@ function AddUser() {
   });
   const token = localStorage.getItem('hotelToken')
   const onSubmit=async()=>{
+    loading(true)
     const formData = new FormData(document.getElementById('addForm'))
     formData.append('profilePic',profileImage)
     const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/addUser`,{method:"POST",headers:{'Authorization':`Bearer ${token}`},body:formData})
@@ -30,6 +33,7 @@ function AddUser() {
     if(res.ok){
     setTotalUsers(prev=>([...prev,result?.newUser]))
     }
+    loading(false)
 
   } 
 
@@ -156,8 +160,8 @@ function AddUser() {
         <button type="button" className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-white font-medium py-2 rounded-lg transition">
           Save to Draft
         </button>
-        <button type="submit" className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 rounded-lg transition cursor-pointer">
-          Publish this Service
+        <button type="submit" className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 rounded-lg transition cursor-pointer justify-center items-center">
+          {load?<div className="loader"></div>:'Publish this Service'}
         </button>
       </div>
     </form>

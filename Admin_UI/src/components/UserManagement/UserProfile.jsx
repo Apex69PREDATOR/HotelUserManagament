@@ -5,14 +5,16 @@ import Designation from './Utils/Designation'
 import Status from './Utils/Status'
 import BasicInfo from './Utils/BasicInfo'
 import { AdminContext } from '../../context/AdminContext'
-import { useContext } from 'react'
+import { useContext,useState } from 'react'
 
 
 const UserProfile = ({currentUser}) => {
     const token = localStorage.getItem('hotelToken')
+    const [load,loading] = useState(false)
     const id = currentUser?._id
     const {setTotalUsers,setCurrentUser,setSeeProfile} = useContext(AdminContext)
    const DeleteUsers=async (user)=>{
+    loading(true)
      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/deleteUser`,{method:"POST",headers:{'Authorization':`Bearer ${token}`,'Content-type':'application/json'},body:JSON.stringify({user})})
 
      const res= await response.json()
@@ -22,6 +24,7 @@ const UserProfile = ({currentUser}) => {
       setCurrentUser(null)
       setSeeProfile(false)
      }
+    loading(false)
     }
   return (
     <div id='profile' className='flex flex-col h-[80vh] md:w-[35vw] w-[100vw] gap-4 [&>_*]:w-[100%] [&>_*]:p-3 [&>_*]:shadow-md [&>_*]:rounded-md justify-center [&_*]:font-sans'>
@@ -41,9 +44,9 @@ const UserProfile = ({currentUser}) => {
       <Role currentUser={currentUser}/>
       <Designation currentUser={currentUser}/>
       <Status/>
-      <Button onClick={(e)=>{
+      <Button className='flex justify-center' onClick={(e)=>{
         e.stopPropagation()
-        DeleteUsers(currentUser)}} id='delete' variant='outlined'  sx={{backgroundColor:'white'}} color='error'>Delete this User Profile</Button>
+        DeleteUsers(currentUser)}} id='delete' variant='outlined'  sx={{backgroundColor:'white'}} color='error'>{load?<div className="loader"></div>:'Delete this User Profile'}</Button>
     </div>
   )
 }

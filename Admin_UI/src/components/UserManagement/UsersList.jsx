@@ -2,8 +2,9 @@ import { PersonOutlined } from '@mui/icons-material'
 import { TextField,InputAdornment } from '@mui/material'
 import { DeleteOutline,EditOutlined,Search } from '@mui/icons-material'
 import { AdminContext } from '../../context/AdminContext'
-import { useContext,useEffect } from 'react'
+import { useContext,useEffect,useState } from 'react'
 const UsersList = () => {
+  const [load,loading] = useState([])
   const {setSeeProfile,setAddUser,setEditUser,setEditField,totalUsers,setTotalUsers,setCurrentUser,setCurrentEdit} = useContext(AdminContext)
     const token = localStorage.getItem('hotelToken')
     async function findUsers(){
@@ -19,6 +20,7 @@ const UsersList = () => {
         findUsers()
     },[])
     const DeleteUsers=async (user)=>{
+      loading(prev=>([...prev,user._id]))
      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/deleteUser`,{method:"POST",headers:{'Authorization':`Bearer ${token}`,'Content-type':'application/json'},body:JSON.stringify({user})})
 
      const res= await response.json()
@@ -28,6 +30,7 @@ const UsersList = () => {
       setCurrentUser(null)
       setSeeProfile(false)
      }
+     loading(prev=>(prev.filter(val=>val!==user._id)))
     }
   return (
     <section id='userList' className='h-[85vh] md:w-[40vw] w-[100vw] bg-white md:p-5 p-2 rounded-md shadow-md flex flex-col gap-6 [&_*]:font-sans'>
@@ -62,10 +65,11 @@ const UsersList = () => {
           setSeeProfile(false)
           setEditField('all')
           setCurrentEdit(val)
-         }}  className='bg-gray-50 md:p-2 p-1 rounded-md shadow-sm md:mr-1 cursor-pointer' sx={{fontSize:window.innerWidth>475?'2.5em':'2em',color:'#b0b0b0'}}/> <DeleteOutline onClick={(e)=>{
+         }}  className='bg-gray-50 md:p-2 p-1 rounded-md shadow-sm md:mr-1 cursor-pointer' sx={{fontSize:window.innerWidth>475?'2.5em':'2em',color:'#b0b0b0'}}/> { 
+          load.includes(val._id) ?<div style={{width:'10px'}} className="loader"></div> : <DeleteOutline onClick={(e)=>{
           e.stopPropagation()
           DeleteUsers(val)
-         }} className='bg-gray-50 md:p-2 p-1 rounded-md shadow-sm cursor-pointer' sx={{fontSize:window.innerWidth>475?'2.5em':'2em',color:'#ffbfba'}}/></span>
+         }} className='bg-gray-50 md:p-2 p-1 rounded-md shadow-sm cursor-pointer' sx={{fontSize:window.innerWidth>475?'2.5em':'2em',color:'#ffbfba'}}/>}</span>
          </div>))}
          
 
