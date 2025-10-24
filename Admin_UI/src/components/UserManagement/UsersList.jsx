@@ -46,13 +46,13 @@ const UsersList = () => {
       }}>+</div>
      </div>
      <div className="users flex flex-col items-center gap-3 overflow-auto md:text-sm text-[0.8em]">
-         <div className='flex justify-between p-2 bg-orange-50  shadow-sm rounded-md [&>_*]:w-[22%] [&>_*]:text-center' style={{fontWeight:'bold',fontFamily:'sans-serif'}}><span>Name</span><span>Designation</span><span>Role</span><span>Status</span><span>Action Buttons</span></div>
+         <div className='flex items-center justify-between w-[100%] h-[60px] p-2 bg-orange-50  shadow-sm rounded-md [&>_*]:w-[22%] [&>_*]:text-center' style={{fontWeight:'bold',fontFamily:'sans-serif'}}><span>Name</span><span>Designation</span><span>Role</span><span>Status</span><span>Action Buttons</span></div>
 
         {totalUsers?.map(val=>(<div key={val._id} onClick={()=>{setSeeProfile(true)
                                    setAddUser(false)
                                    setEditUser(false)
                                    setCurrentUser(val)
-  }} className='flex justify-between items-center md:p-2 p-1 bg-white  shadow-sm rounded-md [&>_*]:w-[22%] h-[60px] [&>_*]:text-center border border-gray-50 cursor-pointer hover:border-orange-100'><span className='flex flex-col items-center'><p>{val.Name}</p>
+  }} className='flex justify-between items-center md:p-2 p-1 bg-white  shadow-sm rounded-md [&>_*]:w-[22%] h-[60px] w-[100%] [&>_*]:text-center border border-gray-50 cursor-pointer hover:border-orange-100'><span className='flex flex-col items-center'><p>{val.Name}</p>
          <p className='p-1 px-2 text-[0.7em] bg-gray-50 text-gray-400 font-semibold rounded-full'>{val._id}</p></span>
          <span className='flex flex-wrap gap-1 [&>_*]:rounded-full [&>_*]:p-1 [&>_*]:text-gray-400 [&>_*]:bg-gray-50 [&>_*]:border-gray-100 [&>_*]:border justify-center [&>_*]:text-[0.7em] [&>_*]:font-bold'>
           <p>{val.Designation}</p>
